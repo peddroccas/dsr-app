@@ -1,7 +1,4 @@
 import {
-  Modal,
-  ModalHeader,
-  ModalBody,
   Button,
   DropdownTrigger,
   Dropdown,

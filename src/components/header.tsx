@@ -1,5 +1,4 @@
 import SRLogo from '@/assets/sao-rafael-icon.svg'
-
 import User from './user'
 import Sidebar from './sidebar'
 
