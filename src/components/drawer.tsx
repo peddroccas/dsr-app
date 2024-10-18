@@ -12,7 +12,7 @@ import { NavLink } from 'react-router-dom'
 export function Drawer() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
-  const adminMenuItems = [
+  const menuItems = [
     {
       name: 'Tarefas dos Gerentes',
       link: '/managers-tasks',
@@ -43,7 +43,7 @@ export function Drawer() {
           <img className="w-full max-h-32" src={SRLogo} alt="sr-logo" />
         </header>
         <main className="flex flex-col p-4 gap-2">
-          {adminMenuItems.map(item => (
+          {menuItems.map(item => (
             <NavLink
               key={item.name}
               className={({ isActive }) =>

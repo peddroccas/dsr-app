@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
-import ManagersTasks from './pages/admin/managers-tasks/managers-tasks'
 import { DefaultLayout } from '@/layouts/default-layout'
+import { ManagersTasks } from './pages/managers-tasks/managers-tasks'
 
 export function Router() {
   return (
