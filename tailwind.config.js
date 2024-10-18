@@ -1,10 +1,11 @@
-const { nextui } = require("@nextui-org/react");
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./src/**/*.{html,tsx,ts}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
+
+  important: true,
   theme: {
     extend: {
       fontFamily: {
@@ -28,6 +29,7 @@ export default {
           950: "#051E33",
         },
         ignara: {
+          DEFAULT: "#E4252F",
           50: "#FCE8E9",
           100: "#F9D2D4",
           200: "#F4A9AD",
@@ -43,5 +45,5 @@ export default {
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [],
 };
