@@ -45,5 +45,21 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+     ({ addComponents })=> {
+      addComponents({
+        '.mui-input': {
+          '.MuiOutlinedInput-root': {
+            '@apply border-venice-blue': {}, // Cor da borda padrão
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              '@apply border-2 border-venice-blue': {}, // Cor ao passar o mouse
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              '@apply border-venice-blue border-2': {}, // Cor ao focar
+            },
+          },
+        },
+      });
+    },
+  ],
 };
