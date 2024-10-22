@@ -5,7 +5,8 @@ import { useQuery } from '@tanstack/react-query'
 import { type ReactNode, createContext, useEffect, useState } from 'react'
 
 export interface AuthType {
-  user: user | undefined
+  user: user | null | undefined
+  token: string
   login: (email: string, password: string) => Promise<void>
   logout: () => void
 }
@@ -17,8 +18,8 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [token, setToken] = useState<string>('')
-  const { data: user, refetch } = useQuery<user>({
-    queryKey: ['profile'],
+  const { data: user, refetch } = useQuery<user | null>({
+    queryKey: ['profile', token],
     enabled: Boolean(token),
     queryFn: async () => {
       if (token) {
@@ -27,7 +28,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       return null
     },
   })
-
   useEffect(() => {
     async function getToken() {
       const token = localStorage.getItem('auth')
@@ -42,17 +42,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const { token } = await signIn({ email, password })
     if (token) {
       localStorage.setItem('auth', token)
+      setToken(token)
       refetch()
     }
   }
 
   async function logout() {
     localStorage.removeItem('auth')
+    setToken('')
     refetch()
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout }}>
       {children}
     </AuthContext.Provider>
   )

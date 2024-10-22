@@ -1,5 +1,6 @@
-import { SignOut, UserCircle } from '@phosphor-icons/react'
+import { useAuth } from '@/hooks/use-auth'
 
 export default function User() {
-  return <div>User</div>
+  const { logout } = useAuth()
+  return <button onClick={logout}>User</button>
 }
