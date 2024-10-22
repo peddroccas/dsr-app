@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { DefaultLayout } from '@/layouts/default-layout'
 import { ManagersTasks } from './pages/managers-tasks/managers-tasks'
-import { Invoicing } from './pages/invoincing/invoicing'
+import { Invoicing } from './pages/invoicing/invoicing'
 import { Losses } from './pages/losses/losses'
 import { Login } from './pages/login/login'
 
