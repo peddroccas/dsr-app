@@ -4,12 +4,20 @@ import { App } from './app.tsx'
 import './index.css'
 import { StyledEngineProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
+import { AuthProvider } from './contexts/auth-context.tsx'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  <QueryClientProvider client={queryClient}>
     <StyledEngineProvider injectFirst>
-      <CssBaseline />
-      <App />
+      <AuthProvider>
+        <StrictMode>
+          <CssBaseline />
+          <App />
+        </StrictMode>
+      </AuthProvider>
     </StyledEngineProvider>
-  </StrictMode>
+  </QueryClientProvider>
 )

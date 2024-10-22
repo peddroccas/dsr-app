@@ -46,16 +46,26 @@ export default {
     },
   },
   plugins: [
-     ({ addComponents })=> {
+    ({ addComponents }) => {
       addComponents({
-        '.mui-input': {
-          '.MuiOutlinedInput-root': {
-            '@apply border-venice-blue': {}, // Cor da borda padrão
-            '&:hover .MuiOutlinedInput-notchedOutline': {
-              '@apply border-2 border-venice-blue': {}, // Cor ao passar o mouse
+        ".mui-input": {
+          ".MuiOutlinedInput-root": {
+            "@apply border-venice-blue": {}, // Cor da borda padrão
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              "@apply border-2 border-venice-blue": {}, // Cor ao passar o mouse
             },
-            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              '@apply border-venice-blue border-2': {}, // Cor ao focar
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              "@apply border-venice-blue border-2": {}, // Cor ao focar
+            },
+            "&.Mui-error": {
+              ".MuiOutlinedInput-notchedOutline": {
+                "@apply !border-ignara": {}, // Cor para estado de erro
+              },
+            },
+          },
+          ".MuiFormLabel-root": {
+            "&.Mui-error": {
+              "@apply !text-ignara": {},
             },
           },
         },

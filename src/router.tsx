@@ -11,7 +11,7 @@ export function Router() {
       <Route path="" element={<Navigate to={'/login'} />} />
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<DefaultLayout />}>
-        <Route path="invoincing" element={<Invoicing />} />
+        <Route path="invoicing" element={<Invoicing />} />
         <Route path="managers-tasks" element={<ManagersTasks />} />
         <Route path="losses" element={<Losses />} />
       </Route>
