@@ -1,36 +1,40 @@
-import {
-  MenuItem,
-  Select as MUISelect,
-  type SelectChangeEvent,
-} from '@mui/material'
-import type { SelectInputProps } from '@mui/material/Select/SelectInput'
-import { forwardRef } from 'react'
+import { Select, SelectItem } from '@nextui-org/react'
+import type { ChangeEvent } from 'react'
 
 interface SelectProps {
-  id: string
-  label: string
-  options?: string[]
   value: string
-  onChange: (e: SelectChangeEvent) => void
-  props?: SelectInputProps
+  label: string
+  size?: 'lg'
+  options: string[]
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ id, label, value, onChange, props, options }, ref) => {
-    return (
-      <MUISelect
-        {...props}
-        ref={ref}
-        labelId={id}
-        id={id}
-        value={value}
-        label={label}
-        onChange={onChange}
-      >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </MUISelect>
-    )
-  }
-)
+export default function BasicSelect({
+  options,
+  onChange,
+  value,
+  size,
+  label,
+}: SelectProps) {
+  return (
+    <Select
+      label={label}
+      onChange={onChange}
+      size={size}
+      className="max-w-prose rounded-xl"
+      value={value}
+      classNames={{
+        trigger:
+          '!bg-transparent !border-venice-blue-950 !border hover:!border-2 focus:!border-2 focus:border-2 !ring-offset-0 !ring-0 ',
+        label: '!text-venice-blue-950',
+      }}
+      selectedKeys={[value]}
+    >
+      {options.map(option => (
+        <SelectItem key={option} value={option}>
+          {option}
+        </SelectItem>
+      ))}
+    </Select>
+  )
+}

@@ -1,25 +1,24 @@
 import { api } from '@/services/api'
 
-interface CreateUserProps {
-  token?: string
+interface DeleteManagersProps {
+  id: string
   name: string
   email: string
-  role: 'MANAGER' | 'ADMIN'
-  storeId?: string
+  token: string
 }
 
-export async function createUser({
-  name,
+export async function updateManager({
+  id,
   email,
-  role,
+  name,
   token,
-}: CreateUserProps) {
-  const response = await api.post(
+}: DeleteManagersProps) {
+  const response = await api.put(
     '/users',
     {
+      userId: id,
       name,
       email,
-      role,
     },
     {
       headers: { Authorization: `Bearer ${token}` },

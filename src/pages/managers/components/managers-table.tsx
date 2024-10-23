@@ -1,58 +1,44 @@
-import { useAuth } from '@/hooks/use-auth'
-import { getManagers } from '@/services/http/get-managers'
-import type { user } from '@/types'
+import { useManager } from '@/hooks/use-manager'
 import {
-  Paper,
+  TableHeader,
+  TableColumn,
   Table,
   TableBody,
   TableCell,
-  TableContainer,
-  TableHead,
   TableRow,
-} from '@mui/material'
-import { useQuery } from '@tanstack/react-query'
+} from '@nextui-org/react'
+import ToolBar from './toolbar'
 
 export function ManagersTable() {
-  const { token } = useAuth()
-  const { data: managers, refetch } = useQuery<user[]>({
-    queryKey: ['managers'],
-    queryFn: async () => getManagers({ token }),
-  })
-
+  const { managers } = useManager()
   if (!managers) {
     return <></>
   }
   return (
-    <TableContainer
-      component={Paper}
-      className="rounded-none bg-venice-blue-950 shadow-none"
+    <Table
+      classNames={{
+        wrapper: 'bg-venice-blue-900',
+        th: 'bg-slate-300 !text-venice-blue-950',
+        base: 'rounded-xl shadow shadow-black !text-slate-50 text-montserrat',
+        tbody: '!rounded-xl',
+      }}
     >
-      <Table
-        aria-label="managers table"
-        className="rounded-2xl bg-venice-blue-900 "
-      >
-        <TableHead>
-          <TableRow>
-            <TableCell className="!text-ignara border-0" align="left">
-              Nome
-            </TableCell>
-            <TableCell className="!text-ignara border-0" align="right">
-              Email
+      <TableHeader>
+        <TableColumn>NOME</TableColumn>
+        <TableColumn>EMAIL</TableColumn>
+        <TableColumn align="center">AÇÕES</TableColumn>
+      </TableHeader>
+      <TableBody>
+        {managers.map(manager => (
+          <TableRow key={manager.id} className="">
+            <TableCell>{manager.name}</TableCell>
+            <TableCell>{manager.email}</TableCell>
+            <TableCell>
+              <ToolBar manager={manager} />
             </TableCell>
           </TableRow>
-        </TableHead>
-        <TableBody className="">
-          {managers.map(manager => (
-            <TableRow
-              key={manager.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell align="left">{manager.name}</TableCell>
-              <TableCell align="right">{manager.email}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+        ))}
+      </TableBody>
+    </Table>
   )
 }
