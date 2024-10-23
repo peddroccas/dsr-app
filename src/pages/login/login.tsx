@@ -60,10 +60,10 @@ export function Login() {
       <header className="relative flex justify-center items-center bg-slate-50 h-24">
         <img className="absolute max-h-48" src={SRLogo} alt="sr-logo" />
       </header>
-      <main className="flex justify-center m-16">
+      <main className="flex justify-center mt-28">
         <form
           onSubmit={handleSubmit(handleLogin)}
-          className="flex flex-col gap-4 items-center bg-slate-50 w-fit p-4 rounded-xl"
+          className="flex flex-col gap-4 items-center bg-slate-50 w-auto p-4 rounded-xl"
         >
           <h1 className="text-ignara font-semibold text-xl">ENTRAR</h1>
           <Controller

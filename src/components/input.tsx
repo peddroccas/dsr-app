@@ -20,7 +20,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         value={value}
         onChange={onChange}
         type={type}
-        className="mui-input"
+        className="mui-input w-80"
         inputRef={ref} // Passando o ref para o TextField
         slotProps={{
           inputLabel: { className: 'text-venice-blue' },
