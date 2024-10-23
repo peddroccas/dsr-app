@@ -1,5 +1,6 @@
 import SRLogo from '@/assets/sao-rafael-logo.svg'
-import { IconButton, Drawer as MUIDrawer } from '@mui/material'
+import { Drawer as MUIDrawer } from '@mui/material'
+import { Button } from '@nextui-org/react'
 import {
   CurrencyDollar,
   List,
@@ -21,7 +22,7 @@ export function Drawer() {
     },
     {
       name: 'Faturamento',
-      link: '/invoincing',
+      link: '/invoicing',
       icon: <CurrencyDollar size={24} />,
     },
     {
@@ -37,13 +38,17 @@ export function Drawer() {
   ]
   return (
     <div>
-      <IconButton onClick={() => setIsDrawerOpen(true)}>
-        <List />
-      </IconButton>
+      <Button
+        className="bg-transparent hover:bg-slate-100"
+        isIconOnly
+        onClick={() => setIsDrawerOpen(true)}
+      >
+        <List size={24} />
+      </Button>
       <MUIDrawer
         open={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
-        classes={{ paper: 'bg-venice-blue-950 gap-3' }}
+        classes={{ paper: '!bg-venice-blue-950 !gap-3' }}
       >
         <header className="bg-slate-50">
           <img className="w-full max-h-32" src={SRLogo} alt="sr-logo" />

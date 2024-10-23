@@ -33,10 +33,10 @@ export function ManagersTable() {
       >
         <TableHead>
           <TableRow>
-            <TableCell className="!text-ignara" align="left">
+            <TableCell className="!text-ignara border-0" align="left">
               Nome
             </TableCell>
-            <TableCell className="!text-ignara" align="right">
+            <TableCell className="!text-ignara border-0" align="right">
               Email
             </TableCell>
           </TableRow>

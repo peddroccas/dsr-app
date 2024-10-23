@@ -1,9 +1,7 @@
 import SRLogo from '@/assets/sao-rafael-logo.svg'
-import { Input } from '@/components/input'
 import { useAuth } from '@/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { CircularProgress, IconButton } from '@mui/material'
-import { ArrowCircleRight } from '@phosphor-icons/react'
+import { Button, CircularProgress, Input } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -63,28 +61,33 @@ export function Login() {
       <main className="flex justify-center mt-28">
         <form
           onSubmit={handleSubmit(handleLogin)}
-          className="flex flex-col gap-4 items-center bg-slate-50 w-auto p-4 rounded-xl"
+          className="flex w-80 flex-col gap-4 rounded-xl bg-slate-50 p-4 text-venice-blue-950 "
         >
-          <h1 className="text-ignara font-semibold text-xl">ENTRAR</h1>
+          <h1 className="text-center text-2xl text-ignara">Login</h1>
           <Controller
             name="email"
             control={control}
             rules={{
+              required: true,
               value: email,
               onChange: e => setEmail(e.target.value),
             }}
             render={({ field }) => (
               <Input
-                {...field}
                 label="Email"
-                type="email"
-                props={{
-                  error: Boolean(errors.email),
-                  helperText: errors.email ? String(errors.email?.message) : '',
+                classNames={{
+                  inputWrapper:
+                    '!bg-transparent !border-venice-blue-950 !border hover:!border-2 focus:!border-2 !ring-offset-0 !ring-0 ',
+                  input: '!text-venice-blue-950',
+                  label: '!text-venice-blue-950',
                 }}
+                {...field}
+                isInvalid={Boolean(errors.email)}
+                errorMessage={String(errors.email?.message)}
               />
             )}
           />
+
           <Controller
             name="password"
             control={control}
@@ -94,29 +97,28 @@ export function Login() {
             }}
             render={({ field }) => (
               <Input
-                {...field}
                 label="Senha"
                 type="password"
-                props={{
-                  error: Boolean(errors.password),
-                  helperText: errors.password
-                    ? String(errors.password?.message)
-                    : '',
+                classNames={{
+                  inputWrapper:
+                    '!bg-transparent !border-venice-blue-950 !border hover:!border-2 focus:!border-2 focus:border-2 !ring-offset-0 !ring-0 ',
+                  input: '!text-venice-blue-950',
+                  label: '!text-venice-blue-950',
                 }}
+                {...field}
+                isInvalid={Boolean(errors.password)}
+                errorMessage={String(errors.password?.message)}
               />
             )}
           />
-          <IconButton
+          <Button
+            variant="solid"
+            className="focus:!outline-venice-blue-950  w-full bg-venice-blue-900 text-slate-50 p-2 font-medium shadow shadow-black hover:!opacity-100 hover:!bg-venice-blue-950"
             type="submit"
-            disabled={hasSubmittedLogin}
-            className="bg-venice-blue-950 rounded-2xl p-2 text-slate-50 hover:opacity-95"
+            size="lg"
           >
-            {hasSubmittedLogin ? (
-              <CircularProgress className="text-slate-50" />
-            ) : (
-              <ArrowCircleRight size={40} />
-            )}
-          </IconButton>
+            {hasSubmittedLogin ? <CircularProgress /> : 'Entrar'}
+          </Button>
         </form>
       </main>
     </div>
