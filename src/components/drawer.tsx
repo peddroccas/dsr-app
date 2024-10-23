@@ -5,6 +5,7 @@ import {
   List,
   ListChecks,
   TrendDown,
+  Users,
 } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
@@ -14,7 +15,7 @@ export function Drawer() {
 
   const menuItems = [
     {
-      name: 'Tarefas dos Gerentes',
+      name: 'Checklist Gerencial',
       link: '/managers-tasks',
       icon: <ListChecks size={24} />,
     },
@@ -27,6 +28,11 @@ export function Drawer() {
       name: 'Perdas',
       link: '/losses',
       icon: <TrendDown size={24} />,
+    },
+    {
+      name: 'Gerentes',
+      link: '/managers',
+      icon: <Users size={24} />,
     },
   ]
   return (
