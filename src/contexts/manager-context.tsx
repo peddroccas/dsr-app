@@ -4,11 +4,11 @@ import type { user } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { type ReactNode, createContext } from 'react'
 
-export interface ContextType {
+export interface ManagerType {
   managers: user[] | null | undefined
   refetch: () => void
 }
-export const ManagerContext = createContext({} as ContextType)
+export const ManagerContext = createContext({} as ManagerType)
 
 interface ContextProviderProps {
   children: ReactNode

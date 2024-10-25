@@ -3,3 +3,8 @@ export type user = {
   name: string
   email: string
 }
+
+export type store = {
+  id: string
+  name: string
+}

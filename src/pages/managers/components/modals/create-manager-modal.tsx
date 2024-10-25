@@ -1,4 +1,3 @@
-import Select from '@/components/select'
 import { useAuth } from '@/hooks/use-auth'
 import { useManager } from '@/hooks/use-manager'
 import { createUser } from '@/services/http/create-user'

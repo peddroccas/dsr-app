@@ -1,3 +1,11 @@
+import { StoreSelect } from '@/components/StoreSelect'
+import { useState } from 'react'
+
 export function Invoicing() {
-  return <div>Invoicing</div>
+  const [selectedStore, setSelectedStore] = useState<string>('')
+  return (
+    <div>
+      <StoreSelect value={selectedStore} onChange={e => setSelectedStore(e)} />
+    </div>
+  )
 }
