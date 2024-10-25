@@ -1,6 +1,5 @@
 import SRLogo from '@/assets/sao-rafael-logo.svg'
-import { Drawer as MUIDrawer } from '@mui/material'
-import { Button } from '@nextui-org/react'
+
 import {
   CurrencyDollar,
   List,

@@ -1,14 +1,6 @@
 import { useAuth } from '@/hooks/use-auth'
 import { deleteManager } from '@/services/http/delete-manager'
 import type { user } from '@/types'
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-} from '@nextui-org/react'
 
 interface DeletemanagerFormModal {
   manager: user

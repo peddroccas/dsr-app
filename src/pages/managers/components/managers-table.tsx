@@ -1,12 +1,5 @@
 import { useManager } from '@/hooks/use-manager'
-import {
-  TableHeader,
-  TableColumn,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from '@nextui-org/react'
+
 import ToolBar from './toolbar'
 
 export function ManagersTable() {

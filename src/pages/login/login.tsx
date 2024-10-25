@@ -1,9 +1,18 @@
 import SRLogo from '@/assets/sao-rafael-logo.svg'
+import { Button } from '@/components/ui/button'
+import { FloatingLabelInput as Input } from '@/components/ui/floating-input'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form'
+import { Spinner } from '@/components/ui/spinner'
 import { useAuth } from '@/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, CircularProgress, Input } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
@@ -18,12 +27,7 @@ export function Login() {
   const { user, login } = useAuth()
   const navigate = useNavigate()
 
-  const {
-    handleSubmit,
-    reset,
-    control,
-    formState: { errors },
-  } = useForm({
+  const loginForm = useForm({
     resolver: zodResolver(loginFormSchema),
   })
   const [hasSubmittedLogin, setHasSubmittedLogin] = useState<boolean>(false)
@@ -47,7 +51,7 @@ export function Login() {
       })
       .finally(() => {
         setHasSubmittedLogin(false)
-        reset({
+        loginForm.reset({
           password: '',
           email: '',
         })
@@ -59,67 +63,69 @@ export function Login() {
         <img className="absolute max-h-48" src={SRLogo} alt="sr-logo" />
       </header>
       <main className="flex justify-center mt-28">
-        <form
-          onSubmit={handleSubmit(handleLogin)}
-          className="flex w-80 flex-col gap-4 rounded-xl bg-slate-50 p-4 text-venice-blue-950 "
-        >
-          <h1 className="text-center text-2xl text-ignara">Login</h1>
-          <Controller
-            name="email"
-            control={control}
-            rules={{
-              required: true,
-              value: email,
-              onChange: e => setEmail(e.target.value),
-            }}
-            render={({ field }) => (
-              <Input
-                label="Email"
-                classNames={{
-                  inputWrapper:
-                    '!bg-transparent !border-venice-blue-950 !border hover:!border-2 focus:!border-2 !ring-offset-0 !ring-0 ',
-                  input: '!text-venice-blue-950',
-                  label: '!text-venice-blue-950',
-                }}
-                {...field}
-                isInvalid={Boolean(errors.email)}
-                errorMessage={String(errors.email?.message)}
-              />
-            )}
-          />
-
-          <Controller
-            name="password"
-            control={control}
-            rules={{
-              value: password,
-              onChange: e => setPassword(e.target.value),
-            }}
-            render={({ field }) => (
-              <Input
-                label="Senha"
-                type="password"
-                classNames={{
-                  inputWrapper:
-                    '!bg-transparent !border-venice-blue-950 !border hover:!border-2 focus:!border-2 focus:border-2 !ring-offset-0 !ring-0 ',
-                  input: '!text-venice-blue-950',
-                  label: '!text-venice-blue-950',
-                }}
-                {...field}
-                isInvalid={Boolean(errors.password)}
-                errorMessage={String(errors.password?.message)}
-              />
-            )}
-          />
-          <Button
-            variant="solid"
-            className="focus:!outline-venice-blue-950  w-full bg-venice-blue-900 text-slate-50 p-2 font-medium shadow shadow-black hover:!opacity-100 hover:!bg-venice-blue-950"
-            type="submit"
-            size="lg"
+        <Form {...loginForm}>
+          <form
+            onSubmit={loginForm.handleSubmit(handleLogin)}
+            className="flex w-80 flex-col gap-4 rounded-xl bg-slate-50 p-4 text-venice-blue-950 "
           >
-            {hasSubmittedLogin ? <CircularProgress /> : 'Entrar'}
-          </Button>
-        </form>
+            <h1 className="text-center text-2xl text-ignara">Login</h1>
+            <FormField
+              name="email"
+              control={loginForm.control}
+              rules={{
+                required: true,
+                value: email,
+                onChange: e => setEmail(e.target.value),
+              }}
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      id="email"
+                      label="Email"
+                      className="border-venice-blue-900 hover:border-2 focus:border-2"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              name="password"
+              control={loginForm.control}
+              rules={{
+                value: password,
+                onChange: e => setPassword(e.target.value),
+              }}
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="password"
+                      label="Senha"
+                      className="border-venice-blue-900 hover:border-2 focus:border-2"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button
+              className="focus:!outline-venice-blue-950  w-full bg-venice-blue-900 text-slate-50 p-2 font-medium shadow shadow-black hover:!opacity-100 hover:!bg-venice-blue-950"
+              type="submit"
+              size="lg"
+            >
+              {hasSubmittedLogin ? (
+                <Spinner size={'large'} className="text-slate-50" />
+              ) : (
+                'Entrar'
+              )}
+            </Button>
+          </form>
+        </Form>
       </main>
     </div>
   )

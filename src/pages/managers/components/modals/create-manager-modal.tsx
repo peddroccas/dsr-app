@@ -4,15 +4,6 @@ import { useManager } from '@/hooks/use-manager'
 import { createUser } from '@/services/http/create-user'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import {
-  Button,
-  CircularProgress,
-  Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-} from '@nextui-org/react'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'

@@ -1,7 +1,6 @@
 import { ManagersTable } from './components/managers-table'
 import { Plus } from '@phosphor-icons/react'
 import { useState } from 'react'
-import { Button } from '@nextui-org/react'
 import CreateManagerModal from './components/modals/create-manager-modal'
 import { ManagerProvider } from '@/contexts/manager-context'
 

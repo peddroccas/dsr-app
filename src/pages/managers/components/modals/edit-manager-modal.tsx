@@ -4,15 +4,6 @@ import { updateManager } from '@/services/http/update-manager'
 import type { user } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import {
-  Button,
-  CircularProgress,
-  Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-} from '@nextui-org/react'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'

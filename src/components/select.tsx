@@ -1,4 +1,3 @@
-import { Select, SelectItem } from '@nextui-org/react'
 import type { ChangeEvent } from 'react'
 
 interface SelectProps {

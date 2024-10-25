@@ -1,5 +1,4 @@
 import type { user } from '@/types'
-import { Tooltip } from '@nextui-org/react'
 import { ArrowsLeftRight, PencilSimple, Trash } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { DeleteManagerModal } from './modals/delete-manager-modal'
