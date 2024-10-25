@@ -1,24 +1,24 @@
 import SRLogo from '@/assets/sao-rafael-logo.svg'
-
 import {
-  CurrencyDollar,
-  List,
-  ListChecks,
-  TrendDown,
-  Users,
-} from '@phosphor-icons/react'
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger,
+} from '@/components/ui/sheet'
+import { CurrencyDollar, List, TrendDown } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Button } from './ui/button'
 
 export function Drawer() {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [isSheetOpen, setIsSheetOpen] = useState(false)
 
   const menuItems = [
-    {
-      name: 'Checklist Gerencial',
-      link: '/managers-tasks',
-      icon: <ListChecks size={24} />,
-    },
+    // {
+    //   name: 'Checklist Gerencial',
+    //   link: '/managers-tasks',
+    //   icon: <ListChecks size={24} />,
+    // },
     {
       name: 'Faturamento',
       link: '/invoicing',
@@ -29,29 +29,26 @@ export function Drawer() {
       link: '/losses',
       icon: <TrendDown size={24} />,
     },
-    {
-      name: 'Gerentes',
-      link: '/managers',
-      icon: <Users size={24} />,
-    },
+    // {
+    //   name: 'Gerentes',
+    //   link: '/managers',
+    //   icon: <Users size={24} />,
+    // },
   ]
   return (
-    <div>
-      <Button
-        className="bg-transparent hover:bg-slate-100"
-        isIconOnly
-        onClick={() => setIsDrawerOpen(true)}
-      >
-        <List size={24} />
-      </Button>
-      <MUIDrawer
-        open={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-        classes={{ paper: '!bg-venice-blue-950 !gap-3' }}
-      >
-        <header className="bg-slate-50">
+    <Sheet open={isSheetOpen} onOpenChange={() => setIsSheetOpen(!isSheetOpen)}>
+      <SheetTrigger asChild>
+        <Button
+          className="bg-transparent hover:bg-slate-100"
+          onClick={() => setIsSheetOpen(true)}
+        >
+          <List size={24} className="text-venice-blue-950" />
+        </Button>
+      </SheetTrigger>
+      <SheetContent className="bg-venice-blue-950">
+        <SheetHeader className="bg-slate-50">
           <img className="w-full max-h-32" src={SRLogo} alt="sr-logo" />
-        </header>
+        </SheetHeader>
         <main className="flex flex-col p-4 gap-2">
           {menuItems.map(item => (
             <NavLink
@@ -64,14 +61,14 @@ export function Drawer() {
                 }`
               }
               to={item.link}
-              onClick={() => setIsDrawerOpen(false)}
+              onClick={() => setIsSheetOpen(false)}
             >
               {item.icon}
               {item.name}
             </NavLink>
           ))}
         </main>
-      </MUIDrawer>
-    </div>
+      </SheetContent>
+    </Sheet>
   )
 }
