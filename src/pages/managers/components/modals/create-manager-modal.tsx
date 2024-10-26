@@ -2,12 +2,21 @@ import { useAuth } from '@/hooks/use-auth'
 import { useManager } from '@/hooks/use-manager'
 import { createUser } from '@/services/http/create-user'
 import { zodResolver } from '@hookform/resolvers/zod'
-
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { Button } from '@/components/ui/button'
+import { Spinner } from '@/components/ui/spinner'
+import { StoreSelect } from '@/components/store-select'
+import { FloatingLabelInput as Input } from '@/components/ui/floating-input'
 
-interface CreateManagerModalProps {
+interface CreateManagerDialogProps {
   open: boolean
   onClose: () => void
 }
@@ -17,10 +26,10 @@ const createNewUserSchema = z.object({
   email: z.string({ message: 'Email inválido' }).email('Email inválido'),
 })
 
-export default function CreateManagerModal({
+export default function CreateManagerDialog({
   open,
   onClose,
-}: CreateManagerModalProps) {
+}: CreateManagerDialogProps) {
   const {
     handleSubmit,
     control,
@@ -46,17 +55,12 @@ export default function CreateManagerModal({
     setHasCreatedNewUser(false)
   }
   return (
-    <Modal
-      isOpen={open}
-      placement="center"
-      onClose={onClose}
-      className="!bg-venice-slate-50 rounded-xl"
-    >
-      <ModalContent>
-        <ModalHeader className="w-full flex justify-center text-xl">
+    <Dialog>
+      <DialogContent>
+        <DialogHeader className="w-full flex justify-center text-xl">
           Adicionar novo gerente
-        </ModalHeader>
-        <ModalBody>
+        </DialogHeader>
+        <DialogContent>
           <form
             onSubmit={handleSubmit(handleCreateUser)}
             className="mt-2 flex flex-col gap-4 items-center"
@@ -68,21 +72,7 @@ export default function CreateManagerModal({
                 value: name,
                 onChange: e => setName(e.target.value),
               }}
-              render={({ field }) => (
-                <Input
-                  type="text"
-                  {...field}
-                  label="Nome"
-                  isInvalid={Boolean(errors.name)}
-                  errorMessage={String(errors.name?.message)}
-                  classNames={{
-                    inputWrapper:
-                      '!bg-transparent !border-venice-blue-950 !border hover:!border-2 focus:!border-2 focus:border-2 !ring-offset-0 !ring-0 ',
-                    input: '!text-venice-blue-950',
-                    label: '!text-venice-blue-950',
-                  }}
-                />
-              )}
+              render={({ field }) => <Input {...field} />}
             />
             <Controller
               name="email"
@@ -92,19 +82,7 @@ export default function CreateManagerModal({
                 onChange: e => setEmail(e.target.value),
               }}
               render={({ field }) => (
-                <Input
-                  {...field}
-                  label="Email"
-                  type="email"
-                  isInvalid={Boolean(errors.email)}
-                  errorMessage={String(errors.email?.message)}
-                  classNames={{
-                    inputWrapper:
-                      '!bg-transparent !border-venice-blue-950 !border hover:!border-2 focus:!border-2 focus:border-2 !ring-offset-0 !ring-0 ',
-                    input: '!text-venice-blue-950',
-                    label: '!text-venice-blue-950',
-                  }}
-                />
+                <Input {...field} label="Email" type="email" />
               )}
             />
             <Controller
@@ -114,13 +92,7 @@ export default function CreateManagerModal({
                 value: store,
                 onChange: e => setStore(e.target.value),
               }}
-              render={({ field }) => (
-                <Select
-                  options={['São Rafael', 'Estrela', 'São Rafael 2', 'Antunes']}
-                  {...field}
-                  label="Loja"
-                />
-              )}
+              render={({ field }) => <StoreSelect {...field} />}
             />
 
             <Button
@@ -130,14 +102,14 @@ export default function CreateManagerModal({
               className="bg-venice-blue-950 rounded-2xl p-2 text-slate-50 hover:opacity-95 mb-4"
             >
               {hasCreatedNewUser ? (
-                <CircularProgress className="text-slate-50" />
+                <Spinner className="text-slate-50" />
               ) : (
                 'Cadastrar'
               )}
             </Button>
           </form>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+        </DialogContent>
+      </DialogContent>
+    </Dialog>
   )
 }

@@ -4,11 +4,11 @@ import { useAuth } from './use-auth'
 
 export const useRequireAuth = () => {
   const navigate = useNavigate()
-  const { user } = useAuth()
+  const { user, token } = useAuth()
 
   useEffect(() => {
-    if (!user) {
+    if (!user && !token) {
       navigate('/login')
     }
-  }, [user, navigate])
+  }, [user, navigate, token])
 }

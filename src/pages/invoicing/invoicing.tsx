@@ -1,4 +1,4 @@
-import { StoreSelect } from '@/components/StoreSelect'
+import { StoreSelect } from '@/components/store-select'
 import { useState } from 'react'
 
 export function Invoicing() {

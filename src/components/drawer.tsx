@@ -5,7 +5,7 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import { CurrencyDollar, List, TrendDown } from '@phosphor-icons/react'
+import { List, ListChecks, Users } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Button } from './ui/button'
@@ -14,26 +14,26 @@ export function Drawer() {
   const [isSheetOpen, setIsSheetOpen] = useState(false)
 
   const menuItems = [
-    // {
-    //   name: 'Checklist Gerencial',
-    //   link: '/managers-tasks',
-    //   icon: <ListChecks size={24} />,
-    // },
     {
-      name: 'Faturamento',
-      link: '/invoicing',
-      icon: <CurrencyDollar size={24} />,
-    },
-    {
-      name: 'Perdas',
-      link: '/losses',
-      icon: <TrendDown size={24} />,
+      name: 'Checklist Gerencial',
+      link: '/managers-tasks',
+      icon: <ListChecks size={24} />,
     },
     // {
-    //   name: 'Gerentes',
-    //   link: '/managers',
-    //   icon: <Users size={24} />,
+    //   name: 'Faturamento',
+    //   link: '/invoicing',
+    //   icon: <CurrencyDollar size={24} />,
     // },
+    // {
+    //   name: 'Perdas',
+    //   link: '/losses',
+    //   icon: <TrendDown size={24} />,
+    // },
+    {
+      name: 'Gerentes',
+      link: '/managers',
+      icon: <Users size={24} />,
+    },
   ]
   return (
     <Sheet open={isSheetOpen} onOpenChange={() => setIsSheetOpen(!isSheetOpen)}>

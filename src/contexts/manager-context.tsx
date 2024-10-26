@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { type ReactNode, createContext } from 'react'
 
 export interface ManagerType {
-  managers: user[] | null | undefined
+  managers: (user & { store: string })[] | null | undefined
   refetch: () => void
 }
 export const ManagerContext = createContext({} as ManagerType)
@@ -16,7 +16,9 @@ interface ContextProviderProps {
 
 export function ManagerProvider({ children }: ContextProviderProps) {
   const { token } = useAuth()
-  const { data: managers, refetch: fetch } = useQuery<user[]>({
+  const { data: managers, refetch: fetch } = useQuery<
+    (user & { store: string })[]
+  >({
     enabled: Boolean(token),
     queryKey: ['managers'],
     queryFn: async () => getManagers({ token }),

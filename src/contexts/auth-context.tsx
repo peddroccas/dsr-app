@@ -17,7 +17,9 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [token, setToken] = useState<string>('')
+  const [token, setToken] = useState<string>(
+    () => localStorage.getItem('auth') || ''
+  )
   const { data: user, refetch } = useQuery<user | null>({
     queryKey: ['profile', token],
     enabled: Boolean(token),
@@ -28,15 +30,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       return null
     },
   })
-  useEffect(() => {
-    async function getToken() {
-      const token = localStorage.getItem('auth')
-      if (token) {
-        setToken(token)
-      }
-    }
-    getToken()
-  }, [])
 
   async function login(email: string, password: string): Promise<void> {
     const { token } = await signIn({ email, password })

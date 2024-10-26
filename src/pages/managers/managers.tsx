@@ -1,8 +1,10 @@
-import { ManagersTable } from './components/managers-table'
+import { ManagerCard } from './components/manager-card'
 import { Plus } from '@phosphor-icons/react'
 import { useState } from 'react'
 import CreateManagerModal from './components/modals/create-manager-modal'
 import { ManagerProvider } from '@/contexts/manager-context'
+import { Button } from '@/components/ui/button'
+import { ManagersCards } from './components/managers-cards'
 
 export function Managers() {
   const [isUserCreatingNewManager, setIsUserCreatingNewManager] =
@@ -14,7 +16,6 @@ export function Managers() {
         <header className="flex justify-between">
           <h1 className="text-ignara-400 text-3xl">Gerentes</h1>
           <Button
-            isIconOnly
             onClick={() => setIsUserCreatingNewManager(true)}
             className="bg-venice-blue-900 shadow shadow-black"
           >
@@ -25,7 +26,7 @@ export function Managers() {
             onClose={() => setIsUserCreatingNewManager(false)}
           />
         </header>
-        <ManagersTable />
+        <ManagersCards />
       </div>
     </ManagerProvider>
   )
