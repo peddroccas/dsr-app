@@ -83,7 +83,7 @@ export function Login() {
                     <Input
                       id="email"
                       label="Email"
-                      className="border-venice-blue-900 hover:border-2 focus:border-2"
+                      className="border-slate-300 hover:border-venice-blue-900 focus:border-venice-blue-900"
                       {...field}
                     />
                   </FormControl>
@@ -106,7 +106,7 @@ export function Login() {
                       {...field}
                       type="password"
                       label="Senha"
-                      className="border-venice-blue-900 hover:border-2 focus:border-2"
+                      className="border-slate-300 hover:border-venice-blue-900 focus:border-venice-blue-900"
                     />
                   </FormControl>
                   <FormMessage />

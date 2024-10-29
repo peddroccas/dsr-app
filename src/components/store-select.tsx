@@ -22,8 +22,8 @@ export function StoreSelect({ value, onChange }: SelectProps) {
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="" />
+      <SelectTrigger className="border-slate-300 hover:border-venice-blue-900 focus:border-venice-blue-900">
+        <SelectValue placeholder="Selecione" />
       </SelectTrigger>
       <SelectContent className="bg-slate-50">
         {stores.map(store => (

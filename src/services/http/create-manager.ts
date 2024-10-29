@@ -1,24 +1,24 @@
 import { api } from '@/services/api'
 
-interface CreateUserProps {
+interface CreateManagerProps {
   token?: string
   name: string
   email: string
-  role: 'MANAGER' | 'ADMIN'
+  storeId: string
 }
 
-export async function createUser({
+export async function createManager({
   name,
   email,
-  role,
+  storeId,
   token,
-}: CreateUserProps) {
+}: CreateManagerProps) {
   const response = await api.post(
-    '/users',
+    '/managers',
     {
       name,
       email,
-      role,
+      storeId,
     },
     {
       headers: { Authorization: `Bearer ${token}` },
