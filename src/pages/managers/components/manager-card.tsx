@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import type { user } from '@/types'
 
 interface ManagerCardProps {
@@ -15,14 +9,12 @@ export function ManagerCard({ manager }: ManagerCardProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>GERENTE</CardTitle>
+        <CardTitle>{manager.name}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p>{manager.name}</p>
+        <p>{manager.email}</p>
+        <p>{manager.store}</p>
       </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter>
     </Card>
   )
 }

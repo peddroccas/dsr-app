@@ -54,9 +54,12 @@ export default function CreateManagerDialog() {
   }
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button className="bg-venice-blue-900 hover:bg-venice-blue-950 shadow shadow-black">
-          <Plus className="text-slate-50" size={24} />
+      <DialogTrigger asChild className="rounded-xl">
+        <Button
+          className="flex w-full h-full bg-slate-50 hover:bg-slate-300 shadow shadow-black"
+          size={'icon'}
+        >
+          <Plus className="text-venice-blue-950 !h-8 !w-8" />
         </Button>
       </DialogTrigger>
       <DialogContent className="bg-slate-50">
