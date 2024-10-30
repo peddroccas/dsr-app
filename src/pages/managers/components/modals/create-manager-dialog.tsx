@@ -48,7 +48,6 @@ export default function CreateManagerDialog() {
     }).catch(() => {
       setHasCreatedNewUser(false)
     })
-    console.log(store)
     refetch()
     setHasCreatedNewUser(false)
   }

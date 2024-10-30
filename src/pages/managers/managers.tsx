@@ -5,8 +5,8 @@ export function Managers() {
   return (
     <ManagerProvider>
       <div className="bg-venice-blue-950 flex flex-col gap-8">
-        <header className="flex justify-between">
-          <h1 className="text-ignara-400 text-3xl">Gerentes</h1>
+        <header className="flex justify-between px-8">
+          <h1 className="text-ignara-400 text-4xl">Gerentes</h1>
         </header>
         <ManagersCards />
       </div>
