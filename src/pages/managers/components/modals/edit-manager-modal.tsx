@@ -63,6 +63,10 @@ export default function EditManagerDialog({
     refetch()
     setHasEditNewUser(false)
   }
+
+  if (!stores) {
+    return <></>
+  }
   return (
     <Dialog>
       <DialogTrigger className="rounded-xl">
@@ -130,7 +134,7 @@ export default function EditManagerDialog({
                 </FormItem>
               )}
             />
-            <Controller
+            {/* <Controller
               name="store"
               control={editManagerForm.control}
               defaultValue={store}
@@ -139,7 +143,7 @@ export default function EditManagerDialog({
                 onChange: e => setStore(e.target.value),
               }}
               render={({ field }) => <StoreSelect {...field} />}
-            />
+            /> */}
             <DialogClose>
               <Button
                 type="submit"
