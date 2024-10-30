@@ -7,7 +7,7 @@ interface ManagerCardProps {
 
 export function ManagerCard({ manager }: ManagerCardProps) {
   return (
-    <Card className="hover:scale-105 transition-transform duration-300 cursor-pointer border border-slate-200 shadow-md shadow-black rounded-lg overflow-hidden">
+    <Card className="hover:scale-105 transition-transform duration-300 cursor-pointer   shadow-black rounded-lg overflow-hidden">
       <CardHeader className="bg-venice-blue p-4 text-slate-50">
         <CardTitle className="text-lg font-semibold">{manager.name}</CardTitle>
       </CardHeader>

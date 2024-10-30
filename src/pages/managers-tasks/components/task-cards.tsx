@@ -15,7 +15,7 @@ export function TaskCards() {
       {tasks.map(task => (
         <Card
           key={task.id}
-          className="hover:scale-105 transition-transform duration-300 cursor-pointer border border-slate-200 shadow-md shadow-black rounded-lg overflow-hidden"
+          className="hover:scale-105 transition-transform duration-300 cursor-pointer  shadow-black rounded-lg overflow-hidden"
         >
           <CardHeader className="bg-venice-blue p-4 text-slate-50">
             <CardTitle className="text-lg font-semibold">
@@ -27,7 +27,7 @@ export function TaskCards() {
               Frequência Semanal:
             </Label>
             <p className="text-venice-blue-700 text-sm font-medium">
-              {task.weeklyFrequency} dia
+              {task.weeklyFrequency}
             </p>
           </CardContent>
         </Card>
