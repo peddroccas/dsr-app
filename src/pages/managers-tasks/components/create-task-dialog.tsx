@@ -1,5 +1,4 @@
 import { useAuth } from '@/hooks/use-auth'
-import { useManager } from '@/hooks/use-manager'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Dialog,
@@ -13,7 +12,6 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
-import { StoreSelect } from '@/components/store-select'
 import { FloatingLabelInput as Input } from '@/components/ui/floating-input'
 import {
   Form,
@@ -23,42 +21,50 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Plus } from '@phosphor-icons/react'
-import { createManager } from '@/services/http/create-manager'
+import { useManager } from '@/hooks/use-manager'
+import { createTask } from '@/services/http/create-task'
 
-const createNewUserSchema = z.object({
-  name: z.string({ message: 'Nome inválido' }).min(1, 'Nome inválido'),
-  email: z.string({ message: 'Email inválido' }).email('Email inválido'),
+// Esquema de validação com Zod
+const createTaskSchema = z.object({
+  title: z.string({ message: 'Título inválido' }).min(1, 'Título inválido'),
+  weeklyFrequency: z.coerce
+    .number()
+    .min(1, 'Frequência deve estar entre 1 e 7')
+    .max(7, 'Frequência deve estar entre 1 e 7'),
 })
 
-export default function CreateManagerDialog() {
-  const createManagerForm = useForm({
-    resolver: zodResolver(createNewUserSchema),
-  })
+export default function CreateTaskDialog() {
   const { token } = useAuth()
-  const { refetchManagers } = useManager()
-
-  const [name, setName] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
-  const [store, setStore] = useState<string>('')
+  const { refetchTasks } = useManager()
+  const [hasCreatedNewTask, setHasCreatedNewTask] = useState<boolean>(false)
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [hasCreatedNewUser, setHasCreatedNewUser] = useState<boolean>(false)
 
-  const handleCreateUser = async () => {
-    setHasCreatedNewUser(true)
+  const createTaskForm = useForm({
+    resolver: zodResolver(createTaskSchema),
+    defaultValues: {
+      title: '',
+      weeklyFrequency: 1,
+    },
+  })
 
-    await createManager({
-      name,
-      email,
-      storeId: store,
-      token,
-    }).catch(() => {
-      setHasCreatedNewUser(false)
-    })
-    createManagerForm.reset()
-    refetchManagers()
-    setIsOpen(false)
-    setHasCreatedNewUser(false)
+  // Função de criação da tarefa
+  const handleCreateTask = async (data: {
+    title: string
+    weeklyFrequency: number
+  }) => {
+    setHasCreatedNewTask(true)
+    try {
+      await createTask({ ...data, token })
+      refetchTasks()
+      createTaskForm.reset()
+      setIsOpen(false)
+    } catch {
+      // Tratamento de erro
+    } finally {
+      setHasCreatedNewTask(false)
+    }
   }
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild className="rounded-xl">
@@ -72,27 +78,24 @@ export default function CreateManagerDialog() {
       <DialogContent className="bg-slate-50">
         <DialogHeader>
           <DialogTitle className="text-venice-blue-950">
-            Adicionar novo gerente
+            Adicionar nova tarefa
           </DialogTitle>
         </DialogHeader>
-        <Form {...createManagerForm}>
+        <Form {...createTaskForm}>
           <form
-            onSubmit={createManagerForm.handleSubmit(handleCreateUser)}
+            onSubmit={createTaskForm.handleSubmit(handleCreateTask)}
             className="flex flex-col gap-4"
           >
             <FormField
-              name="name"
-              control={createManagerForm.control}
-              rules={{
-                value: name,
-                onChange: e => setName(e.target.value),
-              }}
+              name="title"
+              control={createTaskForm.control}
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
                     <Input
+                      type="text"
                       className="border-slate-300 hover:border-venice-blue-900 focus:border-venice-blue-900"
-                      label="Nome"
+                      label="Título"
                       {...field}
                     />
                   </FormControl>
@@ -101,41 +104,29 @@ export default function CreateManagerDialog() {
               )}
             />
             <FormField
-              name="email"
-              control={createManagerForm.control}
-              rules={{
-                value: email,
-                onChange: e => setEmail(e.target.value),
-              }}
+              name="weeklyFrequency"
+              control={createTaskForm.control}
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
                     <Input
+                      type="number"
                       className="border-slate-300 hover:border-venice-blue-900 focus:border-venice-blue-900"
-                      label="Email"
+                      label="Frequência semanal"
                       {...field}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
-            />
-            <FormField
-              name="store"
-              control={createManagerForm.control}
-              rules={{
-                value: store,
-                onChange: e => setStore(e.target.value),
-              }}
-              render={({ field }) => <StoreSelect {...field} />}
             />
             <Button
               type="submit"
-              disabled={hasCreatedNewUser}
+              disabled={hasCreatedNewTask}
               size="lg"
               className="focus:!outline-venice-blue-950 w-full bg-venice-blue-900 text-slate-50 p-2 font-medium shadow shadow-black hover:!opacity-100 hover:!bg-venice-blue-950"
             >
-              {hasCreatedNewUser ? (
+              {hasCreatedNewTask ? (
                 <Spinner className="text-slate-50" />
               ) : (
                 'Cadastrar'

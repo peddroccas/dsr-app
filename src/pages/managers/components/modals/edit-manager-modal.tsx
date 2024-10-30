@@ -16,7 +16,13 @@ import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { StoreSelect } from '@/components/store-select'
 import { FloatingLabelInput as Input } from '@/components/ui/floating-input'
-import { Form, FormControl, FormItem, FormMessage } from '@/components/ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form'
 import { Plus } from '@phosphor-icons/react'
 import { updateManager } from '@/services/http/update-manager'
 import type { user } from '@/types'
@@ -41,7 +47,7 @@ export default function EditManagerDialog({
     resolver: zodResolver(editNewUserSchema),
   })
   const { token } = useAuth()
-  const { refetch } = useManager()
+  const { refetchManagers } = useManager()
   const [name, setName] = useState<string>(manager.name)
   const [email, setEmail] = useState<string>(manager.email)
   const [store, setStore] = useState<string>(
@@ -60,7 +66,7 @@ export default function EditManagerDialog({
     }).catch(() => {
       setHasEditNewUser(false)
     })
-    refetch()
+    refetchManagers()
     setHasEditNewUser(false)
   }
 
@@ -92,7 +98,7 @@ export default function EditManagerDialog({
             onSubmit={editManagerForm.handleSubmit(handleEditUser)}
             className="flex flex-col gap-4"
           >
-            <Controller
+            <FormField
               name="name"
               control={editManagerForm.control}
               defaultValue={name}
@@ -113,7 +119,7 @@ export default function EditManagerDialog({
                 </FormItem>
               )}
             />
-            <Controller
+            <FormField
               name="email"
               control={editManagerForm.control}
               defaultValue={email}
@@ -134,7 +140,7 @@ export default function EditManagerDialog({
                 </FormItem>
               )}
             />
-            {/* <Controller
+            {/* <FormField
               name="store"
               control={editManagerForm.control}
               defaultValue={store}
