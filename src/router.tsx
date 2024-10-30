@@ -5,6 +5,7 @@ import { Invoicing } from './pages/invoicing/invoicing'
 import { Losses } from './pages/losses/losses'
 import { Login } from './pages/login/login'
 import { Managers } from './pages/managers/managers'
+import Stores from './pages/store/stores'
 
 export function Router() {
   return (
@@ -15,6 +16,7 @@ export function Router() {
         <Route path="invoicing" element={<Invoicing />} />
         <Route path="managers-tasks" element={<ManagersTasks />} />
         <Route path="managers" element={<Managers />} />
+        <Route path="stores" element={<Stores />} />
         <Route path="losses" element={<Losses />} />
       </Route>
     </Routes>

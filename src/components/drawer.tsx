@@ -5,7 +5,7 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import { List, ListChecks, Users } from '@phosphor-icons/react'
+import { List, ListChecks, Storefront, Users } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Button } from './ui/button'
@@ -33,6 +33,11 @@ export function Drawer() {
       name: 'Gerentes',
       link: '/managers',
       icon: <Users size={24} />,
+    },
+    {
+      name: 'Lojas',
+      link: '/stores',
+      icon: <Storefront size={24} />,
     },
   ]
   return (
