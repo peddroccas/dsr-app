@@ -7,7 +7,7 @@ export default function TaskTabs() {
       defaultValue="Tarefas"
       className="w-full h-full flex flex-col sm:flex-row sm:items-start gap-8 justify-center items-center"
     >
-      <TabsList className="grid w-fit sm:grid-rows-6 sm:grid-cols-1 grid-cols-3 bg-inherit h-full  gap-4 text-venice-blue-900 bg-slate-50 p-2 rounded">
+      <TabsList className="grid sm:grid-rows-6 sm:grid-cols-1 grid-cols-3 bg-inherit h-full gap-4 text-venice-blue-900 bg-slate-50 p-2 rounded">
         <TabsTrigger value="Tarefas">Tarefas</TabsTrigger>
         <TabsTrigger value="Todas">Todas</TabsTrigger>
         <TabsTrigger value="São Rafael">São Rafael</TabsTrigger>
