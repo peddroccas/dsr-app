@@ -1,21 +1,13 @@
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { TaskCards } from './task-cards'
 
 export default function TaskTabs() {
   return (
-    <Tabs defaultValue="Tarefas" className="w-full">
-      <TabsList className="grid w-full grid-cols-6 bg-slate-50">
+    <Tabs
+      defaultValue="Tarefas"
+      className="w-full h-full flex flex-col sm:flex-row sm:items-start gap-8 justify-center items-center"
+    >
+      <TabsList className="grid w-fit sm:grid-rows-6 sm:grid-cols-1 grid-cols-3 bg-inherit h-full  gap-4 text-venice-blue-900 bg-slate-50 p-2 rounded">
         <TabsTrigger value="Tarefas">Tarefas</TabsTrigger>
         <TabsTrigger value="Todas">Todas</TabsTrigger>
         <TabsTrigger value="São Rafael">São Rafael</TabsTrigger>
@@ -23,29 +15,23 @@ export default function TaskTabs() {
         <TabsTrigger value="Antunes">Antunes</TabsTrigger>
         <TabsTrigger value="São Rafael 2">São Rafael 2</TabsTrigger>
       </TabsList>
-      <TabsContent value="Tarefas">
+      <TabsContent value="Tarefas" className="flex-1">
         <TaskCards />
       </TabsContent>
-      <TabsContent value="password">
-        <Card>
-          <CardHeader>
-            <CardTitle>Password</CardTitle>
-            <CardDescription>
-              Change your password here. After saving, you'll be logged out.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Input id="new" type="password" />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button>Save password</Button>
-          </CardFooter>
-        </Card>
+      <TabsContent value="Todas" className="flex-1">
+        <div className="w-full">pedro</div>
+      </TabsContent>
+      <TabsContent value="São Rafael" className="flex-1">
+        <div className="w-full">pedro</div>
+      </TabsContent>
+      <TabsContent value="Estrela" className="flex-1">
+        <div className="w-full">pedro</div>
+      </TabsContent>
+      <TabsContent value="Antunes" className="flex-1">
+        <div className="w-full">pedro</div>
+      </TabsContent>
+      <TabsContent value="São Rafael 2" className="flex-1">
+        <div className="w-full">pedro</div>
       </TabsContent>
     </Tabs>
   )

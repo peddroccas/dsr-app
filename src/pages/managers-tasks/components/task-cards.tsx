@@ -11,7 +11,7 @@ export function TaskCards() {
   }
 
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-8 bg-venice-blue-900 p-8 rounded-md">
+    <div className="grid h-full sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-8 bg-venice-blue-900 p-8 rounded-md">
       {tasks.map(task => (
         <Card key={task.id} title={task.title}>
           <article className="flex gap-2">
