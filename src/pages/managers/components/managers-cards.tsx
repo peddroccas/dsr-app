@@ -1,7 +1,7 @@
 import { useManager } from '@/hooks/use-manager'
-import { ManagerCard } from './manager-card'
 import CreateManagerDialog from './modals/create-manager-dialog'
 import EditManagerDialog from './modals/edit-manager-modal'
+import Card from '@/components/card'
 
 export function ManagersCards() {
   const { managers } = useManager()
@@ -16,7 +16,14 @@ export function ManagersCards() {
         <EditManagerDialog
           key={manager.id}
           manager={manager}
-          trigger={<ManagerCard key={manager.id} manager={manager} />}
+          trigger={
+            <Card key={manager.id} title={manager.name}>
+              <p className="text-slate-700 text-sm font-medium">
+                {manager.email}
+              </p>
+              <p className="text-slate-600 text-xs italic">{manager.store}</p>
+            </Card>
+          }
         />
       ))}
       <CreateManagerDialog />

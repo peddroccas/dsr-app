@@ -50,7 +50,7 @@ export function Drawer() {
           <List size={24} className="text-venice-blue-950" />
         </Button>
       </SheetTrigger>
-      <SheetContent className="bg-venice-blue-950">
+      <SheetContent className="bg-venice-blue">
         <SheetHeader className="bg-slate-50">
           <img className="w-full max-h-32" src={SRLogo} alt="sr-logo" />
         </SheetHeader>
