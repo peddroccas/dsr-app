@@ -1,15 +1,21 @@
 import { useAuth } from '@/hooks/use-auth'
 import { getManagers } from '@/services/http/get-managers'
+import { getPendingCompletions } from '@/services/http/get-pending-completions'
 import { getTasks } from '@/services/http/get-tasks'
-import type { tasks, user } from '@/types'
+import type { completion, tasks, user } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { type ReactNode, createContext } from 'react'
 
 export interface ManagerType {
   managers: (user & { store: string })[] | null | undefined
   tasks: tasks[] | null | undefined
+  pendingCompletionsByManager:
+    | { completions: completion[]; user: Omit<user, 'email'> }[]
+    | null
+    | undefined
   refetchManagers: () => void
   refetchTasks: () => void
+  refetchPendingCompletions: () => void
 }
 export const ManagerContext = createContext({} as ManagerType)
 
@@ -33,6 +39,17 @@ export function ManagerProvider({ children }: ContextProviderProps) {
     queryFn: async () => getTasks({ token }),
   })
 
+  const { data: pendingCompletionsByManager, refetch: completionFetch } =
+    useQuery<{ completions: completion[]; user: Omit<user, 'email'> }[]>({
+      enabled: Boolean(token),
+      queryKey: ['pendingCompletions'],
+      queryFn: async () => getPendingCompletions({ token }),
+    })
+
+  const refetchPendingCompletions = () => {
+    completionFetch()
+  }
+
   const refetchManagers = () => {
     managersFetch()
   }
@@ -43,7 +60,14 @@ export function ManagerProvider({ children }: ContextProviderProps) {
 
   return (
     <ManagerContext.Provider
-      value={{ managers, tasks, refetchManagers, refetchTasks }}
+      value={{
+        managers,
+        tasks,
+        pendingCompletionsByManager,
+        refetchManagers,
+        refetchTasks,
+        refetchPendingCompletions,
+      }}
     >
       {children}
     </ManagerContext.Provider>

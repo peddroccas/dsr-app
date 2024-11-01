@@ -1,5 +1,5 @@
 import { useManager } from '@/hooks/use-manager'
-import CreateTaskDialog from './create-task-dialog'
+import CreateTaskDialog from './dialogs/create-task-dialog'
 import { Label } from '@/components/ui/label'
 import Card from '@/components/card'
 

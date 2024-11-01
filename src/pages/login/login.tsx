@@ -58,7 +58,7 @@ export function Login() {
       })
   }
   return (
-    <div className="bg-venice-blue-950 h-screen">
+    <div className="bg-venice-blue h-screen">
       <header className="relative flex justify-center items-center bg-slate-50 h-24">
         <img className="absolute max-h-48" src={SRLogo} alt="sr-logo" />
       </header>
@@ -114,7 +114,7 @@ export function Login() {
               )}
             />
             <Button
-              className="focus:!outline-venice-blue-950  w-full bg-venice-blue-900 text-slate-50 p-2 font-medium shadow shadow-black hover:!opacity-100 hover:!bg-venice-blue-950"
+              className="focus:!outline-venice-blue-950  w-full bg-venice-blue text-slate-50 p-2 font-medium shadow shadow-black hover:!opacity-100 hover:!bg-venice-blue-900"
               type="submit"
               size="lg"
             >

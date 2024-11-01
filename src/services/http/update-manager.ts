@@ -1,6 +1,6 @@
 import { api } from '@/services/api'
 
-interface DeleteManagersProps {
+interface updateManagersProps {
   id: string
   name: string
   email: string
@@ -12,7 +12,7 @@ export async function updateManager({
   email,
   name,
   token,
-}: DeleteManagersProps) {
+}: updateManagersProps) {
   const response = await api.put(
     '/users',
     {

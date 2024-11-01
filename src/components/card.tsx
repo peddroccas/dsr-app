@@ -3,14 +3,15 @@ import { Card as UICard, CardHeader, CardTitle, CardContent } from './ui/card'
 
 interface CardProps {
   key: string
-  title: string
+  title: ReactNode
   children?: ReactNode
+  className?: string
 }
-export default function Card({ key, children, title }: CardProps) {
+export default function Card({ key, children, title, className }: CardProps) {
   return (
     <UICard
       key={key}
-      className="hover:scale-105 transition-transform duration-300 cursor-pointer shadow-black rounded-lg overflow-hidden font-roboto"
+      className={`${className} hover:scale-105 transition-transform duration-300 cursor-pointer shadow-black rounded-lg overflow-hidden font-roboto`}
     >
       <CardHeader className="bg-ignara p-4 text-slate-50">
         <CardTitle className="text-xl font-semibold">{title}</CardTitle>

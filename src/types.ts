@@ -14,3 +14,11 @@ export type tasks = {
   title: string
   weeklyFrequency: number
 }
+
+export type completion = {
+  id: string
+  image: string
+  completedAt: Date
+  status: 'PENDING' | 'APPROVED'
+  taskId: string
+}

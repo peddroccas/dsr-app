@@ -11,30 +11,25 @@ export function ManagersTasks() {
         className="w-full h-full flex flex-col sm:flex-row sm:items-start gap-8 justify-center items-center"
       >
         <TabsList className="grid sm:grid-rows-4  grid-cols-1 bg-inherit h-full gap-4 text-venice-blue-900 bg-slate-50 p-2 rounded">
-          <TabsTrigger value="Pendentes de Aprovação">
-            Pendentes de Aprovação
+          <TabsTrigger value="Pendentes de aprovação">
+            Pendentes de aprovação
           </TabsTrigger>
-          <TabsTrigger value="Não Realizadas">Não Realizadas</TabsTrigger>
+          <TabsTrigger value="Não realizadas">Não realizadas</TabsTrigger>
           <TabsTrigger value="Aprovadas">Aprovadas</TabsTrigger>
           <TabsTrigger value="Tarefas">Tarefas</TabsTrigger>
         </TabsList>
         <TabsContent value="Tarefas" className="flex-1">
           <TaskCards />
         </TabsContent>
-        <TabsContent value="Pendentes de Aprovação" className="flex-1">
+        <TabsContent value="Pendentes de aprovação" className="flex-1">
           <PendingApproval />
         </TabsContent>
-        <TabsContent value="São Rafael" className="flex-1">
-          <div className="w-full">pedro</div>
-        </TabsContent>
-        <TabsContent value="Não Realizadas" className="flex-1">
-          <div className="w-full">pedro</div>
+
+        <TabsContent value="Não realizadas" className="flex-1">
+          <div className="w-full">Não realizadas</div>
         </TabsContent>
         <TabsContent value="Aprovadas" className="flex-1">
-          <div className="w-full">pedro</div>
-        </TabsContent>
-        <TabsContent value="São Rafael 2" className="flex-1">
-          <div className="w-full">pedro</div>
+          <div className="w-full">Aprovadas</div>
         </TabsContent>
       </Tabs>
     </ManagerProvider>
