@@ -22,7 +22,7 @@ export function ApproveCompletionDialog({
   completion,
 }: ApproveCompletionDialogProps) {
   const { token } = useAuth()
-  const { refetchPendingCompletions } = useManager()
+  const { refetchPendingCompletions, refetchApprovedCompletions } = useManager()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleDeniedCompletion = async () => {
@@ -34,6 +34,7 @@ export function ApproveCompletionDialog({
   const handleApproveCompletion = async () => {
     await approveCompletion({ id: completion.id, token })
     refetchPendingCompletions()
+    refetchApprovedCompletions()
     setIsOpen(false)
   }
 

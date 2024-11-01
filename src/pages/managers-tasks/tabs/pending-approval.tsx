@@ -7,13 +7,17 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { useManager } from '@/hooks/use-manager'
-import { ApproveCompletionDialog } from './approve-completion-dialog'
+import { ApproveCompletionDialog } from '../components/approve-completion-dialog'
 
-export default function PendingApproval() {
+export function PendingApproval() {
   const { pendingCompletionsByManager, tasks } = useManager()
 
-  if (!pendingCompletionsByManager) {
-    return <></>
+  if (!pendingCompletionsByManager?.length) {
+    return (
+      <div className="grid h-full gap-8 bg-venice-blue-900 p-8 rounded-md">
+        <h1 className="text-slate-50">Sem tarefas pendentes de aprovação</h1>
+      </div>
+    )
   }
 
   return (

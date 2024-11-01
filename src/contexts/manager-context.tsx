@@ -1,4 +1,5 @@
 import { useAuth } from '@/hooks/use-auth'
+import { getApprovedCompletions } from '@/services/http/get-approved-completions'
 import { getManagers } from '@/services/http/get-managers'
 import { getPendingCompletions } from '@/services/http/get-pending-completions'
 import { getTasks } from '@/services/http/get-tasks'
@@ -13,9 +14,14 @@ export interface ManagerType {
     | { completions: completion[]; user: Omit<user, 'email'> }[]
     | null
     | undefined
+  approvedCompletionsByManager:
+    | { completions: completion[]; user: Omit<user, 'email'> }[]
+    | null
+    | undefined
   refetchManagers: () => void
   refetchTasks: () => void
   refetchPendingCompletions: () => void
+  refetchApprovedCompletions: () => void
 }
 export const ManagerContext = createContext({} as ManagerType)
 
@@ -39,7 +45,16 @@ export function ManagerProvider({ children }: ContextProviderProps) {
     queryFn: async () => getTasks({ token }),
   })
 
-  const { data: pendingCompletionsByManager, refetch: completionFetch } =
+  const {
+    data: approvedCompletionsByManager,
+    refetch: approvedCompletionFetch,
+  } = useQuery<{ completions: completion[]; user: Omit<user, 'email'> }[]>({
+    enabled: Boolean(token),
+    queryKey: ['approvedCompletions'],
+    queryFn: async () => getApprovedCompletions({ token }),
+  })
+
+  const { data: pendingCompletionsByManager, refetch: pendingCompletionFetch } =
     useQuery<{ completions: completion[]; user: Omit<user, 'email'> }[]>({
       enabled: Boolean(token),
       queryKey: ['pendingCompletions'],
@@ -47,7 +62,11 @@ export function ManagerProvider({ children }: ContextProviderProps) {
     })
 
   const refetchPendingCompletions = () => {
-    completionFetch()
+    pendingCompletionFetch()
+  }
+
+  const refetchApprovedCompletions = () => {
+    approvedCompletionFetch()
   }
 
   const refetchManagers = () => {
@@ -63,10 +82,12 @@ export function ManagerProvider({ children }: ContextProviderProps) {
       value={{
         managers,
         tasks,
+        approvedCompletionsByManager,
         pendingCompletionsByManager,
         refetchManagers,
         refetchTasks,
         refetchPendingCompletions,
+        refetchApprovedCompletions,
       }}
     >
       {children}
