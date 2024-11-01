@@ -37,7 +37,7 @@ export function Login() {
 
   useEffect(() => {
     if (user) {
-      navigate('/invoicing')
+      navigate('/managers-tasks')
     }
   }, [user, navigate])
 
@@ -45,7 +45,7 @@ export function Login() {
     setHasSubmittedLogin(true)
 
     await login(email, password)
-      .then(() => navigate('/invoicing'))
+      .then(() => navigate('/managers-tasks'))
       .catch(error => {
         alert(error)
       })
