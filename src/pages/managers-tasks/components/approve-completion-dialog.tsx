@@ -22,12 +22,17 @@ export function ApproveCompletionDialog({
   completion,
 }: ApproveCompletionDialogProps) {
   const { token } = useAuth()
-  const { refetchPendingCompletions, refetchApprovedCompletions } = useManager()
+  const {
+    refetchPendingCompletions,
+    refetchApprovedCompletions,
+    refetchPendingTasks,
+  } = useManager()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleDeniedCompletion = async () => {
     await denieCompletion({ id: completion.id, token })
     refetchPendingCompletions()
+    refetchPendingTasks()
     setIsOpen(false)
   }
 

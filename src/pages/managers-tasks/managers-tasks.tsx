@@ -3,6 +3,7 @@ import { ManagerProvider } from '@/contexts/manager-context'
 import { TaskCards } from './components/task-cards'
 import { PendingApproval } from './tabs/pending-approval'
 import { Approved } from './tabs/approved'
+import { PendingTasks } from './tabs/pending-tasks'
 
 export function ManagersTasks() {
   return (
@@ -26,7 +27,7 @@ export function ManagersTasks() {
           <PendingApproval />
         </TabsContent>
         <TabsContent value="Não realizadas" className="flex-1">
-          <div className="w-full">Não realizadas</div>
+          <PendingTasks />
         </TabsContent>
         <TabsContent value="Aprovadas" className="flex-1">
           <Approved />

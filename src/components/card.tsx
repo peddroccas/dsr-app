@@ -16,7 +16,9 @@ export default function Card({ key, children, title, className }: CardProps) {
       <CardHeader className="bg-ignara p-4 text-slate-50">
         <CardTitle className="text-xl font-semibold">{title}</CardTitle>
       </CardHeader>
-      <CardContent className="p-4 space-y-2">{children}</CardContent>
+      <CardContent className="p-4 space-y-2 bg-slate-50">
+        {children}
+      </CardContent>
     </UICard>
   )
 }

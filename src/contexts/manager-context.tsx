@@ -2,6 +2,7 @@ import { useAuth } from '@/hooks/use-auth'
 import { getApprovedCompletions } from '@/services/http/get-approved-completions'
 import { getManagers } from '@/services/http/get-managers'
 import { getPendingCompletions } from '@/services/http/get-pending-completions'
+import { getPendingTasks } from '@/services/http/get-pending-tasks'
 import { getTasks } from '@/services/http/get-tasks'
 import type { completion, tasks, user } from '@/types'
 import { useQuery } from '@tanstack/react-query'
@@ -10,6 +11,23 @@ import { type ReactNode, createContext } from 'react'
 export interface ManagerType {
   managers: (user & { store: string })[] | null | undefined
   tasks: tasks[] | null | undefined
+  pendingTasks:
+    | {
+        manager: {
+          name: string
+          store: string
+          id: string
+          email: string
+        }
+        remainingTasks: {
+          remaining: number
+          id: string
+          title: string
+          weeklyFrequency: number
+        }[]
+      }[]
+    | null
+    | undefined
   pendingCompletionsByManager:
     | { completions: completion[]; user: Omit<user, 'email'> }[]
     | null
@@ -20,6 +38,7 @@ export interface ManagerType {
     | undefined
   refetchManagers: () => void
   refetchTasks: () => void
+  refetchPendingTasks: () => void
   refetchPendingCompletions: () => void
   refetchApprovedCompletions: () => void
 }
@@ -43,6 +62,27 @@ export function ManagerProvider({ children }: ContextProviderProps) {
     enabled: Boolean(token),
     queryKey: ['tasks'],
     queryFn: async () => getTasks({ token }),
+  })
+
+  const { data: pendingTasks, refetch: pendingTasksFetch } = useQuery<
+    {
+      manager: {
+        name: string
+        store: string
+        id: string
+        email: string
+      }
+      remainingTasks: {
+        remaining: number
+        id: string
+        title: string
+        weeklyFrequency: number
+      }[]
+    }[]
+  >({
+    enabled: Boolean(token),
+    queryKey: ['pendingTasks'],
+    queryFn: async () => getPendingTasks({ token }),
   })
 
   const {
@@ -73,6 +113,9 @@ export function ManagerProvider({ children }: ContextProviderProps) {
     managersFetch()
   }
 
+  const refetchPendingTasks = () => {
+    pendingTasksFetch()
+  }
   const refetchTasks = () => {
     tasksFetch()
   }
@@ -81,10 +124,12 @@ export function ManagerProvider({ children }: ContextProviderProps) {
     <ManagerContext.Provider
       value={{
         managers,
+        pendingTasks,
         tasks,
         approvedCompletionsByManager,
         pendingCompletionsByManager,
         refetchManagers,
+        refetchPendingTasks,
         refetchTasks,
         refetchPendingCompletions,
         refetchApprovedCompletions,

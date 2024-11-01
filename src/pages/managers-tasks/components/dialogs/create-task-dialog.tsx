@@ -35,7 +35,7 @@ const createTaskSchema = z.object({
 
 export default function CreateTaskDialog() {
   const { token } = useAuth()
-  const { refetchTasks } = useManager()
+  const { refetchTasks, refetchPendingTasks } = useManager()
   const [hasCreatedNewTask, setHasCreatedNewTask] = useState<boolean>(false)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -56,6 +56,7 @@ export default function CreateTaskDialog() {
     try {
       await createTask({ ...data, token })
       refetchTasks()
+      refetchPendingTasks()
       createTaskForm.reset()
       setIsOpen(false)
     } catch {
