@@ -9,7 +9,7 @@ export function ManagersTasks() {
   return (
     <ManagerProvider>
       <Tabs
-        defaultValue="Tarefas"
+        defaultValue="Pendentes de aprovação"
         className="w-full h-full flex flex-col sm:flex-row sm:items-start gap-8 justify-center items-center"
       >
         <TabsList className="grid sm:grid-rows-4  grid-cols-1 bg-inherit h-full gap-4 text-venice-blue-900 bg-slate-50 p-2 rounded">
