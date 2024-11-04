@@ -1,0 +1,10 @@
+{
+	"projects": {
+		"admin": "admin",
+		"manager": "manager"
+	},
+	"routes": [
+		{ "src": "/admin(/.*)?", "dest": "/admin/$1" },
+		{ "src": "/manager(/.*)?", "dest": "/manager/$1" }
+	]
+}
