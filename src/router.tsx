@@ -8,6 +8,7 @@ import Stores from './pages/store/stores'
 import { AdminLayout } from './layouts/admin-layout'
 import { ManagerLayout } from './layouts/manager-layout'
 import { StoreProvider } from './contexts/store-context'
+import ToDo from './pages/todo/to-do'
 
 export function Router() {
   return (
@@ -41,10 +42,7 @@ function ManagerRoutes() {
   return (
     <Routes>
       <Route path="/" element={<ManagerLayout />}>
-        <Route path="managers-tasks" element={<ManagersTasks />} />
-        <Route path="managers" element={<Managers />} />
-        <Route path="stores" element={<Stores />} />
-        <Route path="losses" element={<Losses />} />
+        <Route path="" element={<ToDo />} />
       </Route>
 
       {/* Adicione outras rotas do admin aqui */}

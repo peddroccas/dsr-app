@@ -6,11 +6,19 @@ interface CardProps {
   title: ReactNode
   children?: ReactNode
   className?: string
+  onClick?: () => void
 }
-export default function Card({ key, children, title, className }: CardProps) {
+export default function Card({
+  key,
+  children,
+  title,
+  className,
+  onClick,
+}: CardProps) {
   return (
     <UICard
       key={key}
+      onClick={onClick}
       className={`${className} hover:scale-105 transition-transform duration-300 cursor-pointer shadow-black rounded-lg overflow-hidden font-roboto`}
     >
       <CardHeader className="bg-ignara p-4 text-slate-50">

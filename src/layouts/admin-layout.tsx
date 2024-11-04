@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
-import { Header } from '@/components/header'
 import { useRequireAuth } from '@/hooks/use-require-auth'
 import { useAdmin } from '@/hooks/use-admin'
+import { Header } from '@/components/admin-header'
 
 export function AdminLayout() {
   useRequireAuth()
