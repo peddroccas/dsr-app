@@ -5,14 +5,14 @@
 			"src": "admin/package.json",
 			"use": "@vercel/static-build",
 			"config": {
-				"distDir": "admin/build"
+				"distDir": "admin/dist"
 			}
 		},
 		{
 			"src": "manager/package.json",
 			"use": "@vercel/static-build",
 			"config": {
-				"distDir": "manager/build"
+				"distDir": "manager/dist"
 			}
 		}
 	],

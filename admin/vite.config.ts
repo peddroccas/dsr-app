@@ -4,6 +4,9 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
 	base: "/admin",
+	build: {
+		outDir: "dist", // Saída para o diretório dist
+	},
 	plugins: [react()],
 	resolve: {
 		alias: {
