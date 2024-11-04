@@ -37,7 +37,14 @@ export function Login() {
 
   useEffect(() => {
     if (user) {
-      navigate('/managers-tasks')
+      switch (user.role) {
+        case 'ADMIN':
+          navigate('/admin')
+          break
+        case 'MANAGER':
+          navigate('/manager')
+          break
+      }
     }
   }, [user, navigate])
 
@@ -45,7 +52,6 @@ export function Login() {
     setHasSubmittedLogin(true)
 
     await login(email, password)
-      .then(() => navigate('/managers-tasks'))
       .catch(error => {
         alert(error)
       })

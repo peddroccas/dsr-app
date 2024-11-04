@@ -2,7 +2,7 @@ import { getProfile } from '@/services/http/get-profile'
 import { login as signIn } from '@/services/http/login'
 import type { user } from '@/types'
 import { useQuery } from '@tanstack/react-query'
-import { type ReactNode, createContext, useEffect, useState } from 'react'
+import { type ReactNode, createContext, useState } from 'react'
 
 export interface AuthType {
   user: user | null | undefined

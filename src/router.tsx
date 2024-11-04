@@ -12,14 +12,39 @@ export function Router() {
     <Routes>
       <Route path="" element={<Navigate to={'/login'} />} />
       <Route path="/login" element={<Login />} />
+      <Route path="admin/*" element={<AdminRoutes />} />
+      <Route path="manager/*" element={<ManagerRoutes />} />
+      {/* <Route path="invoicing" element={<Invoicing />} /> */}
+    </Routes>
+  )
+}
+
+function AdminRoutes() {
+  return (
+    <Routes>
       <Route path="/" element={<DefaultLayout />}>
         <Route path="managers-tasks" element={<ManagersTasks />} />
         <Route path="managers" element={<Managers />} />
         <Route path="stores" element={<Stores />} />
         <Route path="losses" element={<Losses />} />
-
-        {/* <Route path="invoicing" element={<Invoicing />} /> */}
       </Route>
+
+      {/* Adicione outras rotas do admin aqui */}
+    </Routes>
+  )
+}
+
+function ManagerRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<DefaultLayout />}>
+        <Route path="managers-tasks" element={<ManagersTasks />} />
+        <Route path="managers" element={<Managers />} />
+        <Route path="stores" element={<Stores />} />
+        <Route path="losses" element={<Losses />} />
+      </Route>
+
+      {/* Adicione outras rotas do admin aqui */}
     </Routes>
   )
 }

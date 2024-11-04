@@ -2,6 +2,7 @@ export type user = {
   id: string
   name: string
   email: string
+  role: 'ADMIN' | 'MANAGER'
 }
 
 export type store = {
