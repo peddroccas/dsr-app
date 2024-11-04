@@ -1,26 +1,6 @@
 {
-	"projects": {
-		"admin": "admin",
-		"manager": "manager"
-	},
-	"builds": [
-		{
-			"src": "admin/package.json",
-			"use": "@vercel/static-build",
-			"config": {
-				"distDir": "admin/build"
-			}
-		},
-		{
-			"src": "manager/package.json",
-			"use": "@vercel/static-build",
-			"config": {
-				"distDir": "manager/build"
-			}
-		}
-	],
-	"routes": [
-		{ "src": "/admin(/.*)?", "dest": "/admin$1" },
-		{ "src": "/manager(/.*)?", "dest": "/manager$1" }
+	"rewrites": [
+		{ "source": "/manager/(.*)", "destination": "/manager/$1" },
+		{ "source": "/admin/(.*)", "destination": "/admin/$1" }
 	]
 }
