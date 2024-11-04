@@ -6,5 +6,9 @@
 	"routes": [
 		{ "src": "/admin(/.*)?", "dest": "/admin/$1" },
 		{ "src": "/manager(/.*)?", "dest": "/manager/$1" }
+	],
+	"rewrites": [
+		{ "source": "/manager/(.*)", "destination": "/manager/$1" },
+		{ "source": "/admin/(.*)", "destination": "/admin/$1" }
 	]
 }
