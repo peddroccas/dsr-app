@@ -1,10 +1,10 @@
-import { useManager } from '@/hooks/use-manager'
+import { useManagersTasks } from '@/hooks/use-managers-tasks'
 import CreateManagerDialog from './modals/create-manager-dialog'
 import EditManagerDialog from './modals/edit-manager-modal'
 import Card from '@/components/card'
 
 export function ManagersCards() {
-  const { managers } = useManager()
+  const { managers } = useManagersTasks()
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-8 bg-venice-blue-900 p-8 rounded-md">

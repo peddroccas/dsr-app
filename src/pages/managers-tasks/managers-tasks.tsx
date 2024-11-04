@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ManagerProvider } from '@/contexts/manager-context'
+import { ManagersTasksProvider } from '@/contexts/manager-context'
 import { TaskCards } from './components/task-cards'
 import { PendingApproval } from './tabs/pending-approval'
 import { Approved } from './tabs/approved'
@@ -7,7 +7,7 @@ import { PendingTasks } from './tabs/pending-tasks'
 
 export function ManagersTasks() {
   return (
-    <ManagerProvider>
+    <ManagersTasksProvider>
       <Tabs
         defaultValue="Pendentes de aprovação"
         className="w-full h-full flex flex-col sm:flex-row sm:items-start gap-8 justify-center items-center"
@@ -33,6 +33,6 @@ export function ManagersTasks() {
           <Approved />
         </TabsContent>
       </Tabs>
-    </ManagerProvider>
+    </ManagersTasksProvider>
   )
 }

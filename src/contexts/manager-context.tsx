@@ -8,7 +8,7 @@ import type { completion, tasks, user } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { type ReactNode, createContext } from 'react'
 
-export interface ManagerType {
+export interface ManagersTasksType {
   managers: (user & { store: string })[] | null | undefined
   tasks: tasks[] | null | undefined
   pendingTasks:
@@ -42,13 +42,13 @@ export interface ManagerType {
   refetchPendingCompletions: () => void
   refetchApprovedCompletions: () => void
 }
-export const ManagerContext = createContext({} as ManagerType)
+export const ManagersTasksContext = createContext({} as ManagersTasksType)
 
 interface ContextProviderProps {
   children: ReactNode
 }
 
-export function ManagerProvider({ children }: ContextProviderProps) {
+export function ManagersTasksProvider({ children }: ContextProviderProps) {
   const { token } = useAuth()
   const { data: managers, refetch: managersFetch } = useQuery<
     (user & { store: string })[]
@@ -121,7 +121,7 @@ export function ManagerProvider({ children }: ContextProviderProps) {
   }
 
   return (
-    <ManagerContext.Provider
+    <ManagersTasksContext.Provider
       value={{
         managers,
         pendingTasks,
@@ -136,6 +136,6 @@ export function ManagerProvider({ children }: ContextProviderProps) {
       }}
     >
       {children}
-    </ManagerContext.Provider>
+    </ManagersTasksContext.Provider>
   )
 }

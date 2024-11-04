@@ -6,10 +6,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useManager } from '@/hooks/use-manager'
+import { useManagersTasks } from '@/hooks/use-managers-tasks'
 
 export function Approved() {
-  const { approvedCompletionsByManager, tasks } = useManager()
+  const { approvedCompletionsByManager, tasks } = useManagersTasks()
 
   if (!approvedCompletionsByManager?.length) {
     return (

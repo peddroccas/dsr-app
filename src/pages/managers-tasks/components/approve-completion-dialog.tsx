@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { useAuth } from '@/hooks/use-auth'
-import { useManager } from '@/hooks/use-manager'
+import { useManagersTasks } from '@/hooks/use-managers-tasks'
 import { approveCompletion } from '@/services/http/approve-completion'
 import { denieCompletion } from '@/services/http/denie-completion'
 import type { completion } from '@/types'
@@ -26,7 +26,7 @@ export function ApproveCompletionDialog({
     refetchPendingCompletions,
     refetchApprovedCompletions,
     refetchPendingTasks,
-  } = useManager()
+  } = useManagersTasks()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleDeniedCompletion = async () => {

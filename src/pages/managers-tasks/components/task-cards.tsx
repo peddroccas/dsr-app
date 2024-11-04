@@ -1,10 +1,10 @@
-import { useManager } from '@/hooks/use-manager'
+import { useManagersTasks } from '@/hooks/use-managers-tasks'
 import CreateTaskDialog from './dialogs/create-task-dialog'
 import { Label } from '@/components/ui/label'
 import Card from '@/components/card'
 
 export function TaskCards() {
-  const { tasks } = useManager()
+  const { tasks } = useManagersTasks()
 
   if (!tasks) {
     return <></>

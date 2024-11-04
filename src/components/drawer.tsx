@@ -16,7 +16,7 @@ export function Drawer() {
   const menuItems = [
     {
       name: 'Checklist Gerencial',
-      link: '/managers-tasks',
+      link: '/admin/managers-tasks',
       icon: <ListChecks size={24} />,
     },
     // {
@@ -31,12 +31,12 @@ export function Drawer() {
     // },
     {
       name: 'Gerentes',
-      link: '/managers',
+      link: '/admin/managers',
       icon: <Users size={24} />,
     },
     {
       name: 'Lojas',
-      link: '/stores',
+      link: '/admin/stores',
       icon: <Storefront size={24} />,
     },
   ]

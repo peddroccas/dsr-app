@@ -1,8 +1,8 @@
 import Card from '@/components/card'
-import { useManager } from '@/hooks/use-manager'
+import { useManagersTasks } from '@/hooks/use-managers-tasks'
 
 export function PendingTasks() {
-  const { pendingTasks } = useManager()
+  const { pendingTasks } = useManagersTasks()
 
   if (!pendingTasks?.length) {
     return (

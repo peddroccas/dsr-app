@@ -6,11 +6,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useManager } from '@/hooks/use-manager'
+import { useManagersTasks } from '@/hooks/use-managers-tasks'
 import { ApproveCompletionDialog } from '../components/approve-completion-dialog'
 
 export function PendingApproval() {
-  const { pendingCompletionsByManager, tasks } = useManager()
+  const { pendingCompletionsByManager, tasks } = useManagersTasks()
 
   if (!pendingCompletionsByManager?.length) {
     return (

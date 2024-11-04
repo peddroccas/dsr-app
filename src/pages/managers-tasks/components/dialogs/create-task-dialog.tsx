@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Plus } from '@phosphor-icons/react'
-import { useManager } from '@/hooks/use-manager'
+import { useManagersTasks } from '@/hooks/use-managers-tasks'
 import { createTask } from '@/services/http/create-task'
 
 // Esquema de validação com Zod
@@ -35,7 +35,7 @@ const createTaskSchema = z.object({
 
 export default function CreateTaskDialog() {
   const { token } = useAuth()
-  const { refetchTasks, refetchPendingTasks } = useManager()
+  const { refetchTasks, refetchPendingTasks } = useManagersTasks()
   const [hasCreatedNewTask, setHasCreatedNewTask] = useState<boolean>(false)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 

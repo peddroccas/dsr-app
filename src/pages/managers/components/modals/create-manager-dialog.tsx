@@ -1,5 +1,5 @@
 import { useAuth } from '@/hooks/use-auth'
-import { useManager } from '@/hooks/use-manager'
+import { useManagersTasks } from '@/hooks/use-managers-tasks'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Dialog,
@@ -35,7 +35,7 @@ export default function CreateManagerDialog() {
     resolver: zodResolver(createNewUserSchema),
   })
   const { token } = useAuth()
-  const { refetchManagers } = useManager()
+  const { refetchManagers } = useManagersTasks()
 
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
