@@ -47,10 +47,13 @@ export default function ToDo() {
         {pendingTasks.map(task => (
           <CreateCompletionDialog
             taskId={task.id}
+            refetch={refetch}
             key={task.id}
             trigger={
               <Card
-                onClick={() => setIsManagerCompletingTask(true)}
+                onClick={() =>
+                  setIsManagerCompletingTask(!isManagerCompletingTask)
+                }
                 key={task.id}
                 title={task.title}
               >

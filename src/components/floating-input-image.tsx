@@ -7,13 +7,16 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const FloatingInput = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, onChange, ...props }, ref) => {
+    // Gerenciamento do evento onChange para conversão Base64
+
     return (
       <Input
         type="file" // Certifique-se de que o tipo é 'file'
         accept="image/*" // Aceitar apenas imagens
         className={cn('hidden', className)} // Esconder o input padrão
         ref={ref}
+        onChange={onChange} // Conversão em Base64
         {...props}
       />
     )
@@ -41,65 +44,26 @@ FloatingLabel.displayName = 'FloatingLabel'
 type FloatingLabelInputProps = InputProps & {
   label?: string
   helpText?: string
+  fileName?: string // Adicionado para armazenar o nome do arquivo
 }
 
 const FloatingLabelInput = React.forwardRef<
   React.ElementRef<typeof FloatingInput>,
   React.PropsWithoutRef<FloatingLabelInputProps>
->(({ id, label, helpText, ...props }, ref) => {
-  const [imagePreview, setImagePreview] = React.useState<string | null>(null)
-  const [fileName, setFileName] = React.useState<string | null>(null)
-
-  // Função para lidar com a seleção de imagem
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string)
-      }
-      reader.readAsDataURL(file)
-      setFileName(file.name) // Define o nome do arquivo
-    } else {
-      setImagePreview(null)
-      setFileName(null) // Limpa o nome do arquivo se nenhum arquivo foi selecionado
-    }
-  }
-
+>(({ id, label, helpText, fileName, ...props }, ref) => {
   return (
     <div className="relative">
-      <FloatingInput
-        ref={ref}
-        id={id}
-        onChange={handleImageChange} // Chama a função ao mudar
-        {...props}
-      />
+      <FloatingInput ref={ref} id={id} {...props} />
       <FloatingLabel htmlFor={id}>{label}</FloatingLabel>
 
       {/* Botão personalizado para acionar o input escondido */}
       <label htmlFor={id} className="mt-2 inline-block cursor-pointer">
-        <span className="bg-venice-blue-900 text-white py-2 px-4 rounded-md">
-          Escolher Imagem
+        <span className="bg-venice-blue-900 text-slate-50 py-2 px-4 rounded-md">
+          {props.content}
         </span>
       </label>
 
       {helpText && <p className="text-sm text-gray-500 mt-1">{helpText}</p>}
-
-      {/* Exibição da pré-visualização da imagem */}
-      {imagePreview && (
-        <img
-          src={imagePreview}
-          alt="Pré-visualização"
-          className="mt-2 h-32 w-full object-cover rounded border border-gray-300"
-        />
-      )}
-
-      {/* Exibição do nome do arquivo */}
-      {fileName && (
-        <p className="mt-2 text-gray-600">
-          Arquivo: <strong>{fileName}</strong>
-        </p>
-      )}
     </div>
   )
 })

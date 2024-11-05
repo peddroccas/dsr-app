@@ -12,7 +12,6 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
-import { FloatingLabelInput as Input } from '@/components/ui/floating-input'
 import {
   Form,
   FormControl,
@@ -20,51 +19,66 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form'
-import { Plus } from '@phosphor-icons/react'
+import { FloatingLabelInput as Input } from '@/components/floating-input-image'
+import { createCompletion } from '@/services/http/create-completion'
+
+// Esquema de validação com Zod
+const ACCEPTED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+]
+const createCompletionSchema = z.object({
+  image: z
+    .any()
+    .refine(file => file instanceof File, { message: 'Campo inválido' })
+    .refine(file => ACCEPTED_IMAGE_TYPES.includes(file.type), {
+      message: 'Insira uma imagem',
+    }),
+})
 
 interface CreateCompletionDialogProps {
   taskId: string
   trigger?: JSX.Element
+  refetch: () => void
 }
-// Esquema de validação com Zod
-const createCompletionSchema = z.object({
-  image: z.coerce.string().base64(),
-})
 
 export default function CreateCompletionDialog({
   trigger,
   taskId,
+  refetch,
 }: CreateCompletionDialogProps) {
   const { token } = useAuth()
   const [hasCreatedNewCompletion, setHasCreatedNewCompletion] =
     useState<boolean>(false)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const createCompletionForm = useForm({
+  const createCompletionForm = useForm<{ image: File }>({
     resolver: zodResolver(createCompletionSchema),
-    defaultValues: {
-      title: '',
-      weeklyFrequency: 1,
-    },
   })
 
   // Função de criação da tarefa
-  const handleCreateCompletion = async (data: {
-    title: string
-    weeklyFrequency: number
-  }) => {
+  const handleCreateCompletion = async (data: { image: File }) => {
     setHasCreatedNewCompletion(true)
-    try {
-      // await createCompletion({ ...data, token })
-      // refetchCompletions()
-      // refetchPendingCompletions()
-      // createCompletionForm.reset()
-      setIsOpen(false)
-    } catch {
-      // Tratamento de erro
-    } finally {
-      setHasCreatedNewCompletion(false)
+    console.log(data.image.name)
+    const reader = new FileReader()
+    reader.onloadend = async () => {
+      const base64String = reader.result?.toString().split(',')[1] || ''
+      try {
+        await createCompletion({ taskId, image: base64String, token })
+        refetch()
+        createCompletionForm.reset()
+        setIsOpen(false)
+      } catch (error) {
+        // Tratamento de erro
+        console.error(error)
+      } finally {
+        setHasCreatedNewCompletion(false)
+      }
     }
+
+    reader.readAsDataURL(data.image)
   }
 
   return (
@@ -84,17 +98,18 @@ export default function CreateCompletionDialog({
             className="flex flex-col gap-4"
           >
             <FormField
-              name="title"
               control={createCompletionForm.control}
-              render={({ field }) => (
+              name="image"
+              render={({ field: { value, onChange, ...fieldProps } }) => (
                 <FormItem>
                   <FormControl>
                     <Input
+                      {...fieldProps}
+                      placeholder="Picture"
                       type="file"
-                      accept="image/*"
-                      label="Imagem"
-                      className="border-slate-300 hover:border-venice-blue-900 focus:border-venice-blue-900"
-                      {...field}
+                      content={value ? value.name : 'Selecione uma imagem'}
+                      accept="image/*, application/pdf"
+                      onChange={event => onChange(event.target.files?.[0])}
                     />
                   </FormControl>
                   <FormMessage />
