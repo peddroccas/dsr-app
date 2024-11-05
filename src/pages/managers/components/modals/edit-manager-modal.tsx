@@ -10,11 +10,10 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
-import { StoreSelect } from '@/components/store-select'
 import { FloatingLabelInput as Input } from '@/components/ui/floating-input'
 import {
   Form,
@@ -50,9 +49,7 @@ export default function EditManagerDialog({
   const { refetchManagers } = useManagersTasks()
   const [name, setName] = useState<string>(manager.name)
   const [email, setEmail] = useState<string>(manager.email)
-  const [store, setStore] = useState<string>(
-    stores!.find(store => store.name === manager.store)!.id
-  )
+
   const [hasEditNewUser, setHasEditNewUser] = useState<boolean>(false)
 
   const handleEditUser = async () => {
